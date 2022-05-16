@@ -130,16 +130,14 @@ app.get("/submit", function(req, res){
 
 app.post("/submit", function(req, res){
   const submittedSecret = req.body.secret;
-  console.log(req.user);
+ 
   User.findById(req.user.id, function(err, foundUser) {
       if (err) {
           console.log(err);
       } else {
-          console.log(foundUser);
+
           if(foundUser) {
-              console.log("User found");
-              console.log(submittedSecret);
-              foundUser.secret = submittedSecret;
+               foundUser.secret = submittedSecret;
               foundUser.save(function() {
                   res.redirect("/secrets");
               });
